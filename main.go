@@ -29,6 +29,7 @@ func main() {
 	}
 
 	fmt.Println("Введите последовательночть чисел разделенных запятой с пробелом")
+	// исправил ввод
 	reader := bufio.NewReader(os.Stdin)
 	input, er = reader.ReadString('\n')
 	if er != nil {
