@@ -20,7 +20,6 @@ func main() {
 		fmt.Println("Ошибка ввода", er)
 		return
 	}
-	// operation = "MED"
 
 	if !(operation == "AVG" || operation == "SUM" || operation == "MED") {
 		fmt.Println("Доступны только операции AVG,SUN,MED")
@@ -29,7 +28,6 @@ func main() {
 
 	fmt.Println("Введите последовательночть чисел разделенных запятой с пробелом")
 	fmt.Scanln(&input)
-	// input = "1, 5, 2, 6, 8, 23, 2, 35"
 
 	// Разбиваем строку по разделителю ", "
 	parts := strings.Split(input, ", ")
