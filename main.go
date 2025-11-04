@@ -24,12 +24,12 @@ func main() {
 	}
 
 	if !(operation == "AVG" || operation == "SUM" || operation == "MED") {
-		fmt.Println("Доступны только операции AVG,SUN,MED")
+		fmt.Println("Доступны только операции AVG,SUM,MED")
 		return
 	}
 
 	fmt.Println("Введите последовательночть чисел разделенных запятой с пробелом")
-	// исправил ввод
+
 	reader := bufio.NewReader(os.Stdin)
 	input, er = reader.ReadString('\n')
 	if er != nil {
@@ -51,7 +51,7 @@ func main() {
 		}
 		numbers = append(numbers, num)
 	}
-	fmt.Println("Упорядочено", numbers)
+
 	st := RunOperation(&numbers, operation)
 	fmt.Printf("Значение %s по входным данным будет: %.2f", operation, st)
 }
@@ -69,24 +69,33 @@ func RunOperation(numbers *[]int, operation string) float64 {
 
 	switch operation {
 	case "AVG":
-		return float64(sumArrInt(numbers)) / float64(len(*numbers))
+		return RunAVG(numbers)
 	case "SUM":
 		return float64(sumArrInt(numbers))
 	case "MED":
-		return RunMED(*numbers)
+		return RunMED(numbers)
 	default:
 		return 0.0
 	}
 }
 
-func RunMED(numbers []int) float64 {
+func RunAVG(numbers *[]int) float64 {
+	if len(*numbers) == 0 {
+		return 0.0
+	} else {
+		return float64(sumArrInt(numbers)) / float64(len(*numbers))
+	}
 
-	if len(numbers) == 0 {
+}
+
+func RunMED(numbers *[]int) float64 {
+
+	if len(*numbers) == 0 {
 		return 0
 	}
 
-	nums := make([]int, len(numbers))
-	copy(nums, numbers)
+	nums := make([]int, len(*numbers))
+	copy(nums, *numbers)
 	sort.Ints(nums)
 
 	n := len(nums)
