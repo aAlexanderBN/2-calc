@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 	"sort"
 	"strconv"
 	"strings"
@@ -27,7 +29,11 @@ func main() {
 	}
 
 	fmt.Println("Введите последовательночть чисел разделенных запятой с пробелом")
-	fmt.Scanln(&input)
+	reader := bufio.NewReader(os.Stdin)
+	input, er = reader.ReadString('\n')
+	if er != nil {
+		fmt.Println("Ошибка ввода", er)
+	}
 
 	// Разбиваем строку по разделителю ", "
 	parts := strings.Split(input, ", ")
