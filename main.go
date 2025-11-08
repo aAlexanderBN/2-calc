@@ -9,6 +9,8 @@ import (
 	"strings"
 )
 
+type ff func(*[]int) float64
+
 func main() {
 
 	fmt.Println("Выберите операцию")
@@ -56,27 +58,24 @@ func main() {
 	fmt.Printf("Значение %s по входным данным будет: %.2f", operation, st)
 }
 
-func sumArrInt(numbers *[]int) int {
+func sumArrInt(numbers *[]int) float64 {
 
 	var total int
 	for _, v := range *numbers {
 		total += v
 	}
-	return total
+	return float64(total)
 }
 
 func RunOperation(numbers *[]int, operation string) float64 {
 
-	switch operation {
-	case "AVG":
-		return RunAVG(numbers)
-	case "SUM":
-		return float64(sumArrInt(numbers))
-	case "MED":
-		return RunMED(numbers)
-	default:
-		return 0.0
+	m := map[string]func(*[]int) float64{
+		"AVG": RunAVG,
+		"SUM": sumArrInt,
+		"MED": RunMED,
 	}
+
+	return m[operation](numbers)
 }
 
 func RunAVG(numbers *[]int) float64 {
